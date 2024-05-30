@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "logger-test-chart-client-side-solution",
+    "id": "5b00edda-f50f-4530-960e-4223aea49bde",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "Colton McClintock",
+      "websiteUrl": "colton923@gmail.com",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.18.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "logger-test-chart description"
+      },
+      "longDescription": {
+        "default": "logger-test-chart description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "logger-test-chart Feature",
+        "description": "The feature that activates elements of the logger-test-chart solution.",
+        "id": "4f6d119d-2423-47d0-aeee-84e492a2d67e",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/logger-test-chart.sppkg"
+  }
+}

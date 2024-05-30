@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "logger-chart-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/loggerChart/LoggerChartWebPart.js",
+          "manifest": "./src/webparts/loggerChart/LoggerChartWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "LoggerChartWebPartStrings": "lib/webparts/loggerChart/loc/{locale}.js"
+  }
+}
