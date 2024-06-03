@@ -17,5 +17,9 @@
     "types": ["webpack-env"],
     "lib": ["es5", "dom", "es2015.collection", "es2015.promise", "ESNext"]
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/webparts/loggerChart/components/chart/ChartController"
+  ]
 }

@@ -33,6 +33,7 @@ export type MetricParcel = {
   t1: NiceObject;
   diff: DiffObject;
 };
+
 export type TMetricDataMap = Map<number, MetricParcel[]>;
 
 export type TDataPoint = {

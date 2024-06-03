@@ -9,7 +9,7 @@ interface IChartController {
 }
 
 const margin = { top: 50, right: 0, bottom: 20, left: 50 };
-const width = 400 - margin.left - margin.right;
+const width = 600 - margin.left - margin.right;
 const height = 600 - margin.top - margin.bottom;
 
 const ChartController = ({ data }: IChartController) => {

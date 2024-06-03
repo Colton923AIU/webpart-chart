@@ -7,7 +7,7 @@ import type {
 } from "../../types/LoggerDataTypes";
 import DiffLogData from "../../functions/DiffLogData";
 
-const MetricDataPrep = (data: NiceObject[]) => {
+export const MetricDataPrep = (data: NiceObject[]) => {
   const MetricDataMap: TMetricDataMap = new Map();
 
   data.map((val, index) => {

@@ -1,10 +1,14 @@
 import * as React from "react";
-import styles from "./LoggerChart.module.scss";
 import type { ILoggerChartProps } from "./ILoggerChartProps";
 import useSharePointListData from "../../../hooks/useSharePointListData/useSharePointListData";
 import InitializeLoggerData from "../../../functions/InitializeLoggerData";
-import AverageResponse from "../../../metrics/AverageResponse/AverageResponse";
-import ChartController from "./chart/ChartController.tsx/ChartController";
+// import AverageResponse from "../../../metrics/AverageResponse/AverageResponse";
+// import ChartController from "./chart/ChartController/ChartController";
+import ChangeListController from "./changelist/ChangeListController/ChangeListController";
+import MostRecentChange, {
+  IChange,
+} from "../../../metrics/MostRecentChange/MostRecentChange";
+// import { NiceObject } from "../../../types/LoggerDataTypes";
 
 const LoggerChart: React.FC<ILoggerChartProps> = (props: ILoggerChartProps) => {
   const [listData] = useSharePointListData({
@@ -12,35 +16,49 @@ const LoggerChart: React.FC<ILoggerChartProps> = (props: ILoggerChartProps) => {
     absoluteUrl: props.absoluteUrl,
     spListLink: props.spListLink,
   });
-  const [metricOneData, setMetricOneData] = React.useState<
-    null | { [item: string]: number[] }[]
-  >(null);
+  // const [metricOneData, setMetricOneData] = React.useState<
+  //   null | { [item: string]: number[] }[]
+  // >(null);
+  // const [loggerData, setLoggerData] = React.useState<NiceObject[]>();
+  const [mostRecentChangeData, setMostRecentChangeData] = React.useState<
+    IChange[]
+  >([]);
 
   React.useEffect(() => {
     if (listData === null) return;
-    const MetricOne = (listData: any) => {
-      return AverageResponse(
-        InitializeLoggerData(
-          listData.value.map((row: Record<string, any>) => {
-            return Object.keys(row).reduce((prev: string, curr: string) => {
-              if (curr.includes("_og")) {
-                if (row[curr] !== null) {
-                  prev += row[curr];
-                }
-              }
-              return prev;
-            }, "");
-          })
-        )
+
+    const tempData: string[] = [];
+    listData.forEach((row: Record<string, any>) => {
+      tempData.push(
+        Object.keys(row).reduce((prev: string, curr: string) => {
+          if (curr.includes("_og")) {
+            if (row[curr] !== null) {
+              prev += row[curr];
+            }
+          }
+          return prev;
+        }, "")
       );
-    };
-    const metricData = MetricOne(listData);
-    setMetricOneData(metricData);
+    });
+    const logData = InitializeLoggerData(tempData);
+
+    // setLoggerData(logData);
+    // const MetricOne = (listData: any) => {
+    //   return AverageResponse(listData);
+    // };
+    // const metricData = MetricOne(listData);
+    const mrcData = MostRecentChange(logData).filter(
+      (a) => a.events.length > 0
+    );
+    setMostRecentChangeData(mrcData);
   }, [listData]);
 
   return (
-    <section className={`${styles.loggerChart}`}>
-      <div>
+    <section>
+      {mostRecentChangeData ? (
+        <ChangeListController data={mostRecentChangeData} />
+      ) : null}
+      {/* <div>
         <h2>Dynamic Chart of Logged Data</h2>
         <p>Average Response Time Example Metric</p>
         <p>
@@ -69,7 +87,7 @@ const LoggerChart: React.FC<ILoggerChartProps> = (props: ILoggerChartProps) => {
             return <p style={{ width: "100%" }}>{JSON.stringify(item)}</p>;
           })}
         </div>
-      ) : null}
+      ) : null} */}
     </section>
   );
 };

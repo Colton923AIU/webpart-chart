@@ -36,7 +36,7 @@ const useSharePointListData: ({
         });
       if (data) {
         // todo: Pass a 'cleanse-data' function to this hook.
-        setListData(data);
+        setListData(data.value);
         // setListData(cleanData);
         return;
       }
